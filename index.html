@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Solo Vault – Hunter Media Library</title>
+<link rel="icon" href="favicon.png"><link rel="stylesheet" href="style.css">
+</head><body>
+<header class="top">
+  <a class="brand" href="/"><img src="logo.png" width="38" height="38" alt=""><b>SOLO VAULT</b></a>
+  <input id="q" type="search" placeholder="Search the gate..." aria-label="Search">
+</header>
+<main>
+  <section class="panel status">
+    <div><small>[SYSTEM] STORAGE GATE</small><h1 id="used">0 / 50 GB</h1></div>
+    <div class="meter"><i id="bar"></i></div>
+    <p id="modeNote" class="muted" hidden style="flex-basis:100%">[SYSTEM] Local mode: no server found, so files are saved in this browser only. Run node server.js to store files on a server and share download links.</p>
+  </section>
+  <nav class="tabs" id="tabs">
+    <button data-c="all" class="on">All</button><button data-c="anime">Anime</button><button data-c="movie">Anime Movie</button><button data-c="video">Videos</button><button data-c="music">Music</button>
+  </nav>
+  <section class="panel up" id="drop">
+    <div><b>Arise: add files</b><p class="muted">Drop files here or choose them. Stored on the server and kept until you delete them.</p></div>
+    <select id="upcat" aria-label="Category"><option value="anime">Anime</option><option value="movie">Anime Movie</option><option value="video">Videos</option><option value="music">Music</option></select>
+    <button class="btn" id="pick">Choose files</button><input type="file" id="fileIn" multiple hidden accept="video/*,audio/*,.mkv">
+    <div id="queue"></div>
+  </section>
+  <div id="crumbs" class="crumbs"></div>
+  <div id="grid" class="grid"></div>
+</main>
+
+<div id="player" hidden>
+  <div class="stage idle" id="stage">
+    <video id="v" playsinline></video>
+    <audio id="ext" hidden></audio>
+    <div class="zones"><div id="zl"></div><div id="zc"></div><div id="zr"></div></div>
+    <div id="flash"></div>
+    <div class="ctl top2"><button id="close" aria-label="Close">✕</button><span id="ptitle"></span></div>
+    <div class="ctl bot">
+      <input type="range" id="seek" min="0" max="1000" value="0" aria-label="Seek">
+      <div class="rowc">
+        <button id="back">⟲10</button><button id="pp">▶</button><button id="fwd">10⟳</button>
+        <span id="time">0:00 / 0:00</span><span class="sp"></span>
+        <button id="mute" aria-label="Mute">🔊</button><input type="range" id="vol" min="0" max="1" step="0.05" value="1" aria-label="Volume">
+        <button id="gear" aria-label="Settings">⚙</button><button id="fs" aria-label="Fullscreen">⛶</button>
+      </div>
+    </div>
+    <div class="menu" id="menu" hidden>
+      <label>Brightness <input type="range" id="bri" min="0.3" max="2" step="0.05" value="1"></label>
+      <label>Speed <select id="spd"><option>0.5</option><option>0.75</option><option selected>1</option><option>1.25</option><option>1.5</option><option>2</option></select></label>
+      <label>Subtitles <select id="subSel"><option value="-1">Off</option></select></label>
+      <button class="btn sm" id="addSub">+ Add subtitle (.srt / .vtt)</button><input type="file" id="subIn" accept=".srt,.vtt" hidden>
+      <label>Audio <select id="audSel"><option value="orig">Original</option></select></label>
+      <button class="btn sm" id="addAud">+ Add audio file</button><input type="file" id="audIn" accept="audio/*,video/*" hidden>
+      <a class="btn sm" id="dl" href="#">Download</a>
+    </div>
+  </div>
+</div>
+<dialog id="moveDlg"><h3>Move to folder</h3><select id="moveSel"></select><div class="rowd"><button class="btn sm" id="moveOk">Move here</button><button class="btn sm ghost" id="moveNo">Cancel</button></div></dialog>
+<div id="toast" role="status"></div>
+<script src="app.js"></script>
+</body></html>
